@@ -1,0 +1,11 @@
+// Gergoplex specfic combos 
+
+COMB(lt,            KC_LT,          KC_H, KC_I)
+COMB(lbrc,          KC_LBRC,        KC_O, KC_E)
+COMB(lcbr,          KC_LCBR,        KC_U, KC_A)
+COMB(dqt,           KC_DQT,         KC_X, KC_DOT)
+
+COMB(quot,          KC_QUOT,        KC_G, KC_D)
+COMB(rcbr,          KC_RCBR,        KC_C, KC_S)
+COMB(rbrc,          KC_RBRC,        KC_R, KC_T)
+COMB(gt,            KC_GT,          KC_F, KC_N)
