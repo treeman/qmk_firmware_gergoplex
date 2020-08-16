@@ -3,16 +3,19 @@
 # Make sure you have dfu-programmer installed!
 #----------------------------------------------------------------------------
 # Firmware options
-MOUSEKEY_ENABLE 					= yes
+MOUSEKEY_ENABLE = yes
 
 #Debug options
-VERBOSE 		 							= yes
-DEBUG_MATRIX_SCAN_RATE   	= no
-DEBUG_MATRIX		 					= yes
-CONSOLE_ENABLE						= yes
+VERBOSE = yes
+DEBUG_MATRIX_SCAN_RATE   = no
+DEBUG_MATRIX = yes
+CONSOLE_ENABLE = yes
 
 #Combos!
-VPATH               			+=  keyboards/gboards/
+VPATH +=  keyboards/gboards/
+
+LEADER_ENABLE = yes
+MOUSEKEY_ENABLE = yes
 
 # A bunch of stuff that you shouldn't touch unless you
 # know what you're doing.

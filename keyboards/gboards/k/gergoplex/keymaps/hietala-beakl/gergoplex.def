@@ -1,12 +1,32 @@
-// Gergoplex specfic combos 
-
-COMB(lt,            KC_LT,          KC_H, KC_I)
-COMB(lbrc,          KC_LBRC,        KC_O, KC_E)
-COMB(lcbr,          KC_LCBR,        KC_U, KC_A)
+// Upper left symbols
+COMB(lt,            KC_LT,          KC_Q, KC_Y)
+COMB(perc,          KC_PERC,        KC_H, LCTL_T(KC_I))
+COMB(lbrc,          KC_LBRC,        KC_O, LALT_T(KC_E))
+COMB(lprn,          KC_LPRN,        KC_U, LSFT_T(KC_A))
 COMB(dqt,           KC_DQT,         KC_X, KC_DOT)
 
+// Upper right symbols
 COMB(quot,          KC_QUOT,        KC_G, KC_D)
-COMB(rcbr,          KC_RCBR,        KC_C, KC_S)
-COMB(rcbr2,         KC_RCBR,        KC_C, RSFT_T(KC_S))
-COMB(rbrc,          KC_RBRC,        KC_R, KC_T)
-COMB(gt,            KC_GT,          KC_F, KC_N)
+COMB(rprn,          KC_RPRN,        KC_C, RSFT_T(KC_S))
+COMB(rbrc,          KC_RBRC,        KC_R, RALT_T(KC_T))
+COMB(eq,            KC_EQL,         KC_F, RCTL_T(KC_N))
+COMB(gt,            KC_GT,          KC_Z, KC_B)
+
+// Lower left symbols
+COMB(min,           KC_MINS,        LCTL_T(KC_I), KC_COLN)
+COMB(astr,          KC_ASTR,        LALT_T(KC_E), KC_SLSH)
+COMB(lcbr,          KC_LCBR,        LSFT_T(KC_A), KC_K)
+COMB(scln,          KC_SCLN,        KC_DOT, KC_COMM)
+
+// Lower right symbols
+COMB(dlr,           KC_DLR,         KC_D, KC_W)
+COMB(rcbr,          KC_RCBR,        RSFT_T(KC_S), KC_M)
+COMB(hash,          KC_HASH,        RALT_T(KC_T), KC_L)
+COMB(unds,          KC_UNDS,        RCTL_T(KC_N), KC_P)
+
+// Special characters
+COMB(delete,        KC_DEL,         KC_H, KC_O)
+COMB(backspace,     KC_BSPC,        KC_R, KC_F)
+COMB(tab,           KC_TAB,         LALT_T(KC_E), LSFT_T(KC_A))
+COMB(escape,        KC_ESC,         RSFT_T(KC_S), RALT_T(KC_T))
+
