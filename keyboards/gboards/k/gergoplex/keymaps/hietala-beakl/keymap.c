@@ -14,16 +14,25 @@
 #define T_MOD RALT_T(KC_T)
 #define N_MOD RCTL_T(KC_N)
 
+#define SPACE_MOD LGUI_T(KC_SPACE)
+#define ENT_MOD RGUI_T(KC_ENT)
+
 #include QMK_KEYBOARD_H
-#include "g/keymap_combo.h"
 #include <stdio.h>
+
+enum my_keycodes {
+  MOVE_ON = SAFE_RANGE,
+  MOVE_OFF,
+};
 
 #define BASE 0 // default layer
 #define SYM 1 // symbol layer
 #define NUM 2 // number layer
 #define FUN 3 // function layer
-#define MOV 4 // movement/mouse layer
-#define QWERTY 5 // qwerty layer
+#define MOVE 4 // movement/mouse layer
+#define SHRT 5 // shortcut layer
+
+#include "g/keymap_combo.h"
 
 /* Combomap
  *
@@ -59,8 +68,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Y,  I_MOD,  E_MOD,  A_MOD, KC_DOT,     KC_D, S_MOD, T_MOD, N_MOD, KC_B,
     KC_J,  KC_COLN,KC_SLSH,KC_K,  KC_COMM,    KC_W, KC_M,  KC_L,  KC_P,  KC_V,
 
-    TT(MOV),  LGUI_T(KC_SPACE),  OSL(NUM),  // Left
-    OSL(SYM), KC_ENT,            KC_LEAD    // Right
+    OSL(SHRT), SPACE_MOD,  OSL(NUM),  // Left
+    OSL(SYM),  ENT_MOD,    KC_LEAD    // Right
     ),
 /* Keymap 1: Symbols layer
  */
@@ -105,17 +114,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 /* Keymap 4: Movement/mouse layer
  */
-[MOV] = LAYOUT_gergoplex(
+[MOVE] = LAYOUT_gergoplex(
     KC_END, KC_PGDN,KC_UP,  KC_PGUP, KC_HOME,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-    KC_WBAK,KC_LEFT,KC_DOWN,KC_RIGHT,KC_WFWD,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-    KC_TRNS,KC_BTN1,KC_TRNS,KC_BTN2, KC_TRNS,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+    KC_BTN4,KC_LEFT,KC_DOWN,KC_RIGHT,KC_BTN5,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+    KC_NO,  KC_BTN1,KC_TRNS,KC_BTN2, KC_NO,      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
 
-    TG(MOV), KC_SPACE, KC_ENTER, // Left
-    KC_TRNS, KC_TRNS,  KC_TRNS   // Right
+    OSL(SHRT), KC_SPACE, KC_ENTER, // Left
+    KC_TRNS,   KC_TRNS,  KC_TRNS   // Right
     ),
-/* Keymap 5: qwerty layer
+/* Keymap 5: Shortcut layer
  */
-[QWERTY] = LAYOUT_gergoplex(
+[SHRT] = LAYOUT_gergoplex(
     KC_Q,KC_W,KC_E,KC_R,KC_T,    KC_Y,KC_U,KC_I,   KC_O,  KC_P,
     KC_A,KC_S,KC_D,KC_F,KC_G,    KC_H,KC_J,KC_K,   KC_L,  KC_M,
     KC_Z,KC_X,KC_C,KC_V,KC_B,    KC_N,KC_M,KC_COMM,KC_DOT,KC_MINUS,
@@ -124,28 +133,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS    // Right
     )
 };
-
-/*
-enum unicode_names {
-    A1_L,
-    A2_L,
-    O2_L,
-    A1_U,
-    A2_U,
-    O2_U,
-    BTC
-};
-
-const uint32_t PROGMEM unicode_map[] = {
-    [A1_L] 0x00E5, // å
-    [A2_L] 0x00E4, // ä
-    [O2_L] 0x00F6, // ö
-    [A1_U] 0x00C5, // Å
-    [A2_U] 0x00C4, // Ä
-    [O2_U] 0x00D6, // Ö
-    [BTC] = 0x20BF, // ₿
-};
-*/
 
 bool swap_caps_escape = false;
 
@@ -171,6 +158,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       return true;
+    case MOVE_ON:
+      layer_on(MOVE);
+      return false;
+    case MOVE_OFF:
+      layer_off(MOVE);
+      return false;
     default:
       return true;
   }
@@ -199,7 +192,7 @@ void matrix_scan_user(void) {
       swap_caps_escape = !swap_caps_escape;
     }
     SEQ_TWO_KEYS(KC_P, KC_V) {
-      SEND_STRING("BEAKL-HIETALA 0.1");
+      SEND_STRING("v0.1");
     }
     SEQ_THREE_KEYS(KC_W, KC_P, KC_M) {
       sprintf(wpm_str, "WPM: %03d", get_current_wpm());
@@ -226,7 +219,6 @@ void matrix_scan_user(void) {
     /*
     SEQ_TWO_KEYS(KC_DOT, KC_E) {
   //    SEND_STRING("é");
-      send_unicode_string("(ノಠ痊ಠ)ノ彡┻━┻");
     }
     SEQ_TWO_KEYS(KC_COMM, KC_E) {
       SEND_STRING("è");
@@ -236,14 +228,6 @@ void matrix_scan_user(void) {
     }
     SEQ_TWO_KEYS(KC_COMM, KC_A) {
       SEND_STRING("à");
-    }
-    */
-    /*
-    SEQ_TWO_KEYS(KC_S, KC_U) {
-     // toggle unicode support
-     // is this even possible...?
-     // UC_LNX  Switch to Linux input
-    //  UC_WINC Switch to Windows input
     }
     */
   }

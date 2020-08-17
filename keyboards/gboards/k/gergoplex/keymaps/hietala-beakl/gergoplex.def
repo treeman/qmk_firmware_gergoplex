@@ -30,3 +30,8 @@ COMB(backspace,     KC_BSPC,        KC_R, KC_F)
 COMB(tab,           KC_TAB,         E_MOD, A_MOD)
 COMB(escape,        KC_ESC,         S_MOD, T_MOD)
 
+// Movement layer activation
+COMB(move_on,       MOVE_ON,        I_MOD, A_MOD)
+COMB(move_off,      MOVE_OFF,       KC_LEFT, KC_RIGHT)
+COMB(mid_mouse,     KC_BTN3,        KC_BTN1, KC_BTN2)
+
