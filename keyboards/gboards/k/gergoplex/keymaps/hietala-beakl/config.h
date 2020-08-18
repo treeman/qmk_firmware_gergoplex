@@ -3,18 +3,21 @@
 
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
-#undef COMBO_TERM
-#define COMBO_TERM 30
 
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
-#define COMBO_PERMISSIVE_HOLD
+#define RETRO_TAPPING
 
-#define LEADER_TIMEOUT 300
+#define COMBO_PERMISSIVE_HOLD
+#undef COMBO_TERM
+#define COMBO_TERM 30
+#define COMBO_TERM_PER_COMBO
+
+#define LEADER_TIMEOUT 250
 #define LEADER_PER_KEY_TIMING
 
-#undef TAPPING_TOGGLE
-#define TAPPING_TOGGLE 1
+// Maybe this is necessary...?
+// #define TAP_CODE_DELAY 100
 
 // Not supported without flto
 #define NO_ACTION_MACRO

@@ -1,28 +1,49 @@
-/* Good on you for modifying your layout! if you don't have
- * time to read the QMK docs, a list of keycodes can be found at
+#include QMK_KEYBOARD_H
+
+/*
+ * TODO
+ * 1. Dead characters don't work properly
+ * 2. Modifier support on shortcut layer
+ * 3. TAPPING_FORCE_HOLD per key?
+ * 4. Move some altgr keys?
+ * 5. Highlight altgre keys?
  *
- * https://github.com/qmk/qmk_firmware/blob/master/docs/keycodes.md
  *
- * There's also a template for adding new layers at the bottom of this file!
+ * Another attempt:
+ *
+ *
+ * Experiences with home row mods:
+ *   https://www.reddit.com/r/ErgoMechKeyboards/comments/ibsi0k/your_experiences_with_modlayer_tap/
  */
 
-#define I_MOD LCTL_T(KC_I)
-#define E_MOD LALT_T(KC_E)
-#define A_MOD LSFT_T(KC_A)
-
-#define S_MOD RSFT_T(KC_S)
-#define T_MOD RALT_T(KC_T)
-#define N_MOD RCTL_T(KC_N)
-
-#define SPACE_MOD LGUI_T(KC_SPACE)
-#define ENT_MOD RGUI_T(KC_ENT)
-
-#include QMK_KEYBOARD_H
 #include <stdio.h>
+#include "keymap_swedish.h"
+#include "sendstring_swedish.h"
+
+#define _______ KC_TRNS
+#define xxxxx KC_NO
+
+#define HOME_Y LGUI_T(SE_Y)
+#define HOME_I LALT_T(SE_I)
+#define HOME_E LSFT_T(SE_E)
+#define HOME_A LCTL_T(SE_A)
+
+// Right shift adds a return for some reason :<
+#define HOME_S RCTL_T(SE_S)
+#define HOME_T LSFT_T(SE_T)
+#define HOME_N RALT_T(SE_N)
+#define HOME_B RGUI_T(SE_B)
+
+#define TH_SPACE KC_SPACE
+#define TH_ENTER KC_ENT
 
 enum my_keycodes {
   MOVE_ON = SAFE_RANGE,
   MOVE_OFF,
+  // Avoid dead keys
+  GRV,
+  CIRC,
+  TILD,
 };
 
 #define BASE 0 // default layer
@@ -64,22 +85,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  '-------------------------'           '-----------------'
  */
 [BASE] = LAYOUT_gergoplex(
-    KC_Q,  KC_H,   KC_O,   KC_U,  KC_X,       KC_G, KC_C,  KC_R,  KC_F,  KC_Z,
-    KC_Y,  I_MOD,  E_MOD,  A_MOD, KC_DOT,     KC_D, S_MOD, T_MOD, N_MOD, KC_B,
-    KC_J,  KC_COLN,KC_SLSH,KC_K,  KC_COMM,    KC_W, KC_M,  KC_L,  KC_P,  KC_V,
+    SE_Q,  SE_H,   SE_O,   SE_U,  SE_X,       SE_G, SE_C,  SE_R,  SE_F,  SE_Z,
+    HOME_Y,HOME_I, HOME_E, HOME_A,SE_DOT,     SE_D, HOME_S,HOME_T,HOME_N,HOME_B,
+    SE_J,  SE_COLN,SE_SLSH,SE_K,  SE_COMM,    SE_W, SE_M,  SE_L,  SE_P,  SE_V,
 
-    OSL(SHRT), SPACE_MOD,  OSL(NUM),  // Left
-    OSL(SYM),  ENT_MOD,    KC_LEAD    // Right
+    OSL(SHRT), TH_SPACE,  OSL(NUM),  // Left
+    OSL(SYM),  TH_ENTER,  KC_LEAD    // Right
     ),
 /* Keymap 1: Symbols layer
  */
 [SYM] = LAYOUT_gergoplex(
-    KC_NO, KC_AT,   KC_PLUS, KC_PIPE, KC_NO,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-    KC_NO, KC_TILD, KC_EXLM, KC_QUES, KC_GRV,   KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-    KC_NO, KC_AMPR, KC_CIRC, KC_BSLS, KC_TRNS,  KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+    xxxxx, SE_AT,   SE_PLUS, SE_PIPE, xxxxx,    _______,_______,_______,_______,_______,
+    xxxxx, TILD,    SE_EXLM, SE_QUES, GRV,      SE_TILD,SE_GRV, SE_CIRC,SE_ACUT,SE_DIAE,
+    xxxxx, SE_AMPR, CIRC,    SE_BSLS, xxxxx,    _______,_______,_______,_______,_______,
 
-    KC_TRNS, KC_TRNS, KC_TRNS, // Left
-    KC_TRNS, KC_TRNS, KC_TRNS  // Right
+    _______, _______, _______, // Left
+    _______, _______, _______  // Right
     ),
 /* Keymap 2: Number layer
  *
@@ -95,42 +116,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  '-------------------------'           '-----------------'
  */
 [NUM] = LAYOUT_gergoplex(
-    KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,    KC_NO, KC_7, KC_8, KC_9, KC_NO,
-    KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,    KC_NO, KC_0, KC_1, KC_2, KC_3,
-    OSL(FUN),KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,    KC_NO, KC_4, KC_5, KC_6, KC_NO,
+    _______, _______,_______,_______,_______,    xxxxx, SE_7, SE_8, SE_9, xxxxx,
+    _______, _______,_______,_______,_______,    xxxxx, SE_0, SE_1, SE_2, SE_3,
+    OSL(FUN),_______,_______,_______,_______,    xxxxx, SE_4, SE_5, SE_6, xxxxx,
 
-    KC_TRNS, KC_TRNS,         KC_TRNS, // Left
-    KC_TRNS, RGUI_T(KC_PENT), KC_TRNS  // Right
+    _______, _______,         _______, // Left
+    _______, RGUI_T(KC_PENT), _______  // Right
     ),
 /* Keymap 3: Function layer
  */
 [FUN] = LAYOUT_gergoplex(
-    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,    KC_F12, KC_F7,  KC_F8, KC_F9, KC_NO,
-    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,    KC_F11, KC_F10, KC_F1, KC_F2, KC_F3,
-    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,    KC_NO,  KC_F4,  KC_F5, KC_F6, KC_NO,
+    _______,_______,_______,_______,_______,    KC_F12, KC_F7,  KC_F8, KC_F9, xxxxx,
+    _______,_______,_______,_______,_______,    KC_F11, KC_F10, KC_F1, KC_F2, KC_F3,
+    _______,_______,_______,_______,_______,    xxxxx,  KC_F4,  KC_F5, KC_F6, xxxxx,
 
-    KC_TRNS, KC_TRNS, KC_TRNS, // Left
-    KC_TRNS, KC_TRNS, KC_TRNS  // Right
+    _______, _______, _______, // Left
+    _______, _______, _______  // Right
     ),
 /* Keymap 4: Movement/mouse layer
  */
 [MOVE] = LAYOUT_gergoplex(
-    KC_END, KC_PGDN,KC_UP,  KC_PGUP, KC_HOME,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-    KC_BTN4,KC_LEFT,KC_DOWN,KC_RIGHT,KC_BTN5,    KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-    KC_NO,  KC_BTN1,KC_TRNS,KC_BTN2, KC_NO,      KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
+    KC_END, KC_PGDN,KC_UP,  KC_PGUP, KC_HOME,    _______,_______,_______,_______,_______,
+    KC_BTN4,KC_LEFT,KC_DOWN,KC_RIGHT,KC_BTN5,    _______,_______,_______,_______,_______,
+    xxxxx,  KC_BTN1,_______,KC_BTN2, xxxxx,      _______,_______,_______,_______,_______,
 
     OSL(SHRT), KC_SPACE, KC_ENTER, // Left
-    KC_TRNS,   KC_TRNS,  KC_TRNS   // Right
+    _______,   _______,  _______   // Right
     ),
 /* Keymap 5: Shortcut layer
  */
 [SHRT] = LAYOUT_gergoplex(
-    KC_Q,KC_W,KC_E,KC_R,KC_T,    KC_Y,KC_U,KC_I,   KC_O,  KC_P,
-    KC_A,KC_S,KC_D,KC_F,KC_G,    KC_H,KC_J,KC_K,   KC_L,  KC_M,
-    KC_Z,KC_X,KC_C,KC_V,KC_B,    KC_N,KC_M,KC_COMM,KC_DOT,KC_MINUS,
+    SE_Q,SE_W,SE_E,SE_R,SE_T,    _______,_______,_______,_______,_______,
+    SE_A,SE_S,SE_D,SE_F,SE_G,    _______,_______,_______,_______,_______,
+    SE_Z,SE_X,SE_C,SE_V,SE_B,    _______,_______,_______,_______,_______,
 
-    KC_TRNS, KC_TRNS, KC_TRNS,   // Left
-    KC_TRNS, KC_TRNS, KC_TRNS    // Right
+    _______, _______, _______,   // Left
+    _______, _______, _______    // Right
     )
 };
 
@@ -164,6 +185,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MOVE_OFF:
       layer_off(MOVE);
       return false;
+    case GRV:
+      SEND_STRING("`");
+      return false;
+    case CIRC:
+      SEND_STRING("^");
+      return false;
+    case TILD:
+      SEND_STRING("~");
+      return false;
     default:
       return true;
   }
@@ -178,58 +208,34 @@ void matrix_scan_user(void) {
     leading = false;
     leader_end();
 
-    SEQ_ONE_KEY(KC_ENTER) {
+    SEQ_ONE_KEY(TH_ENTER) {
       tap_code(KC_LGUI);
     }
-    SEQ_TWO_KEYS(KC_C, KC_L) {
+    SEQ_TWO_KEYS(SE_C, SE_C) {
       if (swap_caps_escape) {
         tap_code(KC_ESC);
       } else {
         tap_code(KC_CAPS);
       }
     }
-    SEQ_TWO_KEYS(KC_S, KC_C) {
+    SEQ_TWO_KEYS(SE_S, SE_C) {
       swap_caps_escape = !swap_caps_escape;
     }
-    SEQ_TWO_KEYS(KC_P, KC_V) {
+    SEQ_TWO_KEYS(SE_P, SE_V) {
       SEND_STRING("v0.1");
     }
-    SEQ_THREE_KEYS(KC_W, KC_P, KC_M) {
+    SEQ_THREE_KEYS(SE_W, SE_P, SE_M) {
       sprintf(wpm_str, "WPM: %03d", get_current_wpm());
       send_string(wpm_str);
     }
-
-    /*
-    SEQ_ONE_KEY(KC_A) {
-      //tap_code(UC(0x00E5));
-      //tap_code(XP(A1_L, A1_U));
-      send_string("å");
-      send_unicode_string("å");
-      //send_unicode_hex_string("00E5");
-    }
-    */
-    /*
-    SEQ_ONE_KEY(KC_E) {
-      SEND_STRING("ä");
-    }
-    SEQ_ONE_KEY(KC_I) {
-      SEND_STRING("ö");
-    }
-    */
-    /*
-    SEQ_TWO_KEYS(KC_DOT, KC_E) {
-  //    SEND_STRING("é");
-    }
-    SEQ_TWO_KEYS(KC_COMM, KC_E) {
-      SEND_STRING("è");
-    }
-    SEQ_TWO_KEYS(KC_DOT, KC_A) {
-      SEND_STRING("á");
-    }
-    SEQ_TWO_KEYS(KC_COMM, KC_A) {
-      SEND_STRING("à");
-    }
-    */
   }
 }
 
+// FIXME this wasn't good enough :(
+uint16_t get_combo_term(uint16_t index, combo_t *combo) {
+    if (combo->keys[0] == TH_ENTER) {
+        return 100;
+    }
+
+    return COMBO_TERM;
+}

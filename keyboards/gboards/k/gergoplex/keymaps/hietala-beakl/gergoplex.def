@@ -1,37 +1,53 @@
 // Upper left symbols
-COMB(lt,            KC_LT,          KC_Q, KC_Y)
-COMB(perc,          KC_PERC,        KC_H, I_MOD)
-COMB(lbrc,          KC_LBRC,        KC_O, E_MOD)
-COMB(lprn,          KC_LPRN,        KC_U, A_MOD)
-COMB(dqt,           KC_DQT,         KC_X, KC_DOT)
+COMB(lt,            SE_LABK,        SE_Q, SE_Y)
+COMB(perc,          SE_PERC,        SE_H, HOME_I)
+COMB(lbrc,          SE_LBRC,        SE_O, HOME_E)
+COMB(lprn,          SE_LPRN,        SE_U, HOME_A)
+COMB(dqt,           SE_DQUO,        SE_X, SE_DOT)
 
 // Upper right symbols
-COMB(quot,          KC_QUOT,        KC_G, KC_D)
-COMB(rprn,          KC_RPRN,        KC_C, S_MOD)
-COMB(rbrc,          KC_RBRC,        KC_R, T_MOD)
-COMB(eq,            KC_EQL,         KC_F, N_MOD)
-COMB(gt,            KC_GT,          KC_Z, KC_B)
+COMB(quot,          SE_QUOT,        SE_G, SE_D)
+COMB(rprn,          SE_RPRN,        SE_C, HOME_S)
+COMB(rbrc,          SE_RBRC,        SE_R, HOME_T)
+COMB(eq,            SE_EQL,         SE_F, HOME_N)
+COMB(gt,            SE_RABK,        SE_Z, SE_B)
 
 // Lower left symbols
-COMB(min,           KC_MINS,        I_MOD, KC_COLN)
-COMB(astr,          KC_ASTR,        E_MOD, KC_SLSH)
-COMB(lcbr,          KC_LCBR,        A_MOD, KC_K)
-COMB(scln,          KC_SCLN,        KC_DOT, KC_COMM)
+COMB(min,           SE_MINS,        HOME_I, SE_COLN)
+COMB(astr,          SE_ASTR,        HOME_E, SE_SLSH)
+COMB(lcbr,          SE_LCBR,        HOME_A, SE_K)
+COMB(scln,          SE_SCLN,        SE_DOT, SE_COMM)
 
 // Lower right symbols
-COMB(dlr,           KC_DLR,         KC_D, KC_W)
-COMB(rcbr,          KC_RCBR,        S_MOD, KC_M)
-COMB(hash,          KC_HASH,        T_MOD, KC_L)
-COMB(unds,          KC_UNDS,        N_MOD, KC_P)
+COMB(dlr,           SE_DLR,         SE_D, SE_W)
+COMB(rcbr,          SE_RCBR,        HOME_S, SE_M)
+COMB(hash,          SE_HASH,        HOME_T, SE_L)
+COMB(unds,          SE_UNDS,        HOME_N, SE_P)
 
 // Special characters
-COMB(delete,        KC_DEL,         KC_H, KC_O)
-COMB(backspace,     KC_BSPC,        KC_R, KC_F)
-COMB(tab,           KC_TAB,         E_MOD, A_MOD)
-COMB(escape,        KC_ESC,         S_MOD, T_MOD)
+COMB(delete,        KC_DEL,         HOME_I, HOME_E)
+COMB(backspace,     KC_BSPC,        HOME_T, HOME_N)
+COMB(tab,           KC_TAB,         HOME_E, HOME_A)
+COMB(escape,        KC_ESC,         HOME_S, HOME_T)
+
+// Swedish characters
+COMB(arng,          SE_ARNG,        TH_ENTER, HOME_A)
+COMB(adia,          SE_ADIA,        TH_ENTER, HOME_E)
+COMB(odia,          SE_ODIA,        TH_ENTER, HOME_I)
+
+// One-shot mods
+COMB(lgui1,         OSM(MOD_LGUI),  TH_SPACE, HOME_Y)
+COMB(lalt1,         OSM(MOD_LALT),  TH_SPACE, HOME_I)
+COMB(lshift1,       OSM(MOD_LSFT),  TH_SPACE, HOME_E)
+COMB(lctrl1,        OSM(MOD_LCTL),  TH_SPACE, HOME_A)
+
+COMB(rctrl1,        OSM(MOD_RCTL),  TH_ENTER, HOME_S)
+COMB(rshift1,       OSM(MOD_RSFT),  TH_ENTER, HOME_T)
+COMB(ralt1,         OSM(MOD_RALT),  TH_ENTER, HOME_N)
+COMB(rgui1,         OSM(MOD_RGUI),  TH_ENTER, HOME_B)
 
 // Movement layer activation
-COMB(move_on,       MOVE_ON,        I_MOD, A_MOD)
+COMB(move_on,       MOVE_ON,        HOME_I, HOME_A)
 COMB(move_off,      MOVE_OFF,       KC_LEFT, KC_RIGHT)
 COMB(mid_mouse,     KC_BTN3,        KC_BTN1, KC_BTN2)
 
