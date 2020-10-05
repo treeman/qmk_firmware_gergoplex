@@ -1,53 +1,50 @@
-// Upper left symbols
-COMB(lt,            SE_LABK,        SE_Q, SE_Y)
-COMB(perc,          SE_PERC,        SE_H, HOME_I)
-COMB(lbrc,          SE_LBRC,        SE_O, HOME_E)
-COMB(lprn,          SE_LPRN,        SE_U, HOME_A)
-COMB(dqt,           SE_DQUO,        SE_X, SE_DOT)
+// Upper left vertical symbols
+COMB(lt,            SE_LABK,        SE_H, SE_I)
+COMB(lbrc,          SE_LBRC,        SE_O, SE_E)
+COMB(lcbr,          SE_LCBR,        SE_U, SE_A)
+// Lower left vertical symbols
+COMB(min,           SE_MINS,        SE_I, SE_DOT)
+COMB(hash,          SE_HASH,        SE_E, SE_COMM)
+COMB(scln,          SE_SCLN,        SE_A, SE_K)
+// Upper right vertical symbols
+COMB(rcbr,          SE_RCBR,        SE_C, SE_S)
+COMB(rbrc,          SE_RBRC,        SE_R, SE_T)
+COMB(gt,            SE_RABK,        SE_F, SE_N)
+// Lower right vertical symbols
+COMB(eq,            SE_EQL,         SE_S, SE_M)
+COMB(astr,          SE_ASTR,        SE_T, SE_L)
+COMB(unds,          SE_UNDS,        SE_N, SE_P)
 
-// Upper right symbols
-COMB(quot,          SE_QUOT,        SE_G, SE_D)
-COMB(rprn,          SE_RPRN,        SE_C, HOME_S)
-COMB(rbrc,          SE_RBRC,        SE_R, HOME_T)
-COMB(eq,            SE_EQL,         SE_F, HOME_N)
-COMB(gt,            SE_RABK,        SE_Z, SE_B)
+// Upper left horizontal
+COMB(plus,          SE_PLUS,        SE_H, SE_O)
+COMB(pipe,          SE_PIPE,        SE_O, SE_U)
+COMB(dlr,           SE_DLR,         SE_H, SE_U)
+COMB(grv,           GRV,            SE_H, SE_O, SE_U)
+// Upper right horizontal
+COMB(tild,          TILD,           SE_C, SE_R)
+COMB(ampr,          SE_AMPR,        SE_R, SE_F)
+COMB(perc,          SE_PERC,        SE_C, SE_F)
+COMB(circ,          CIRC,           SE_C, SE_R, SE_F)
+COMB(delete,        KC_DEL,         SE_F, SE_Z)
 
-// Lower left symbols
-COMB(min,           SE_MINS,        HOME_I, SE_COLN)
-COMB(astr,          SE_ASTR,        HOME_E, SE_SLSH)
-COMB(lcbr,          SE_LCBR,        HOME_A, SE_K)
-COMB(scln,          SE_SCLN,        SE_DOT, SE_COMM)
+// Home left horizontal
+COMB(tab,           KC_TAB,         SE_I, SE_E)
+COMB(enter,         KC_ENTER,       SE_E, SE_A)
+COMB(lprn,          SE_LPRN,        SE_I, SE_A)
+COMB(dqt,           SE_DQUO,        SE_I, SE_E, SE_A)
+// Home right horizontal
+COMB(escape,        KC_ESC,         SE_S, SE_T)
+COMB(backspace,     KC_BSPC,        SE_T, SE_N)
+COMB(rprn,          SE_RPRN,        SE_S, SE_N)
+COMB(quot,          SE_QUOT,        SE_S, SE_T, SE_N)
 
-// Lower right symbols
-COMB(dlr,           SE_DLR,         SE_D, SE_W)
-COMB(rcbr,          SE_RCBR,        HOME_S, SE_M)
-COMB(hash,          SE_HASH,        HOME_T, SE_L)
-COMB(unds,          SE_UNDS,        HOME_N, SE_P)
-
-// Special characters
-COMB(delete,        KC_DEL,         HOME_I, HOME_E)
-COMB(backspace,     KC_BSPC,        HOME_T, HOME_N)
-COMB(tab,           KC_TAB,         HOME_E, HOME_A)
-COMB(escape,        KC_ESC,         HOME_S, HOME_T)
-
-// Swedish characters
-COMB(arng,          SE_ARNG,        TH_ENTER, HOME_A)
-COMB(adia,          SE_ADIA,        TH_ENTER, HOME_E)
-COMB(odia,          SE_ODIA,        TH_ENTER, HOME_I)
-
-// One-shot mods
-COMB(lgui1,         OSM(MOD_LGUI),  TH_SPACE, HOME_Y)
-COMB(lalt1,         OSM(MOD_LALT),  TH_SPACE, HOME_I)
-COMB(lshift1,       OSM(MOD_LSFT),  TH_SPACE, HOME_E)
-COMB(lctrl1,        OSM(MOD_LCTL),  TH_SPACE, HOME_A)
-
-COMB(rctrl1,        OSM(MOD_RCTL),  TH_ENTER, HOME_S)
-COMB(rshift1,       OSM(MOD_RSFT),  TH_ENTER, HOME_T)
-COMB(ralt1,         OSM(MOD_RALT),  TH_ENTER, HOME_N)
-COMB(rgui1,         OSM(MOD_RGUI),  TH_ENTER, HOME_B)
+// Leaders
+COMB(leader_l,      KC_LEAD,        SE_COMM,SE_K)
+COMB(leader_r,      KC_LEAD,        SE_M, SE_L)
 
 // Movement layer activation
-COMB(move_on,       MOVE_ON,        HOME_I, HOME_A)
-COMB(move_off,      MOVE_OFF,       KC_LEFT, KC_RIGHT)
+COMB(move_on,       MOVE_ON,        SE_DOT,SE_COMM,SE_K)
+COMB(move_off,      MOVE_OFF,       KC_BTN1,KC_BTN3,KC_BTN2)
+
 COMB(mid_mouse,     KC_BTN3,        KC_BTN1, KC_BTN2)
 
