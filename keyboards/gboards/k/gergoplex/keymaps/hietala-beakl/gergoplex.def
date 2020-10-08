@@ -3,6 +3,7 @@ COMB(lt,            SE_LABK,        SE_H, SE_I)
 COMB(lbrc,          SE_LBRC,        SE_O, SE_E)
 COMB(lcbr,          SE_LCBR,        SE_U, SE_A)
 // Lower left vertical symbols
+COMB(plus,          SE_PLUS,        SE_Y, SE_J)
 COMB(min,           SE_MINS,        SE_I, SE_DOT)
 COMB(hash,          SE_HASH,        SE_E, SE_COMM)
 COMB(scln,          SE_SCLN,        SE_A, SE_K)
@@ -14,9 +15,9 @@ COMB(gt,            SE_RABK,        SE_F, SE_N)
 COMB(eq,            SE_EQL,         SE_S, SE_M)
 COMB(astr,          SE_ASTR,        SE_T, SE_L)
 COMB(unds,          SE_UNDS,        SE_N, SE_P)
+COMB(bsls,          SE_BSLS,        SE_B, SE_V)
 
 // Upper left horizontal
-COMB(plus,          SE_PLUS,        SE_H, SE_O)
 COMB(pipe,          SE_PIPE,        SE_O, SE_U)
 COMB(dlr,           SE_DLR,         SE_H, SE_U)
 COMB(grv,           GRV,            SE_H, SE_O, SE_U)
@@ -38,13 +39,11 @@ COMB(backspace,     KC_BSPC,        SE_T, SE_N)
 COMB(rprn,          SE_RPRN,        SE_S, SE_N)
 COMB(quot,          SE_QUOT,        SE_S, SE_T, SE_N)
 
-// Leaders
-COMB(leader_l,      KC_LEAD,        SE_COMM,SE_K)
-COMB(leader_r,      KC_LEAD,        SE_M, SE_L)
-
-// Movement layer activation
-COMB(move_on,       MOVE_ON,        SE_DOT,SE_COMM,SE_K)
-COMB(move_off,      MOVE_OFF,       KC_BTN1,KC_BTN3,KC_BTN2)
-
+// Movement
 COMB(mid_mouse,     KC_BTN3,        KC_BTN1, KC_BTN2)
+COMB(mov_tab,       KC_TAB,         KC_LEFT, KC_DOWN)
+COMB(mov_enter,     KC_ENTER,       KC_DOWN, KC_RIGHT)
+
+// Numpad
+COMB(num_enter,     KC_PENT,        SE_ADIA, SE_ARNG)
 

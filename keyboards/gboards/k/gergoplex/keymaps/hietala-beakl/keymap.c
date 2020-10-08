@@ -23,15 +23,19 @@
 #define SHRT 4
 #define GAME 5
 
-#define _______ KC_TRNS
-#define xxxxx KC_NO
+#define ______ KC_TRNS
+#define xxxxxx KC_NO
 
-#define TH_SPACE LT(MOVE, KC_SPACE)
+#define TH_GUI KC_SPACE
+#define TH_SPACE KC_SPACE
+#define TH_UP OSL(UP)
+
+#define TH_CTRL OSM(MOD_LCTL)
+#define TH_SHIFT OSM(MOD_LSFT)
 #define TH_ALT OSM(MOD_LALT)
 
 enum my_keycodes {
-  MOVE_ON = SAFE_RANGE,
-  MOVE_OFF,
+  TO_BASE,
   // Avoid dead keys
   GRV,
   CIRC,
@@ -55,52 +59,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  '-------------------------'           '-----------------'
  */
 [BASE] = LAYOUT_gergoplex(
-    KC_LEAD, SE_H,   SE_O,    SE_U, SE_Q,     SE_G, SE_C, SE_R, SE_F, SE_Z,
+    KC_LEAD, SE_H,   SE_O,    SE_U, SE_Q,     SE_W, SE_C, SE_R, SE_F, SE_Z,
     SE_Y,    SE_I,   SE_E,    SE_A, SE_COLN,  SE_D, SE_S, SE_T, SE_N, SE_B,
-    KC_J,    SE_DOT, SE_COMM, SE_K, SE_X,     SE_W, SE_M, SE_L, SE_P, SE_V,
+    KC_J,    SE_DOT, SE_COMM, SE_K, SE_X,     SE_G, SE_M, SE_L, SE_P, SE_V,
 
-    TH_ALT,  TH_SPACE,      OSM(MOD_LCTL),
-    OSL(UP), OSM(MOD_LSFT), OSM(MOD_LGUI)
+    TH_GUI,  TH_SPACE, TH_UP,
+    TH_CTRL, TH_SHIFT, TH_ALT
     ),
 /* Keymap 1: Up layer
  */
 [UP] = LAYOUT_gergoplex(
-    SE_TILD,SE_GRV, SE_CIRC,SE_ACUT,SE_DIAE,    xxxxx, SE_7, SE_8, SE_9, xxxxx,
-    _______,SE_ODIA,SE_ADIA,SE_ARNG,_______,    xxxxx, SE_1, SE_2, SE_3, xxxxx,
-    _______,_______,_______,_______,OSL(FUN),   xxxxx, SE_4, SE_5, SE_6, xxxxx,
+    ______, ______, ______, _______,______,    xxxxxx, SE_7, SE_8, SE_9, TO_BASE,
+    ______, SE_ODIA,SE_ADIA,SE_ARNG,______,    xxxxxx, SE_1, SE_2, SE_3, xxxxxx,
+    SE_TILD,SE_GRV, SE_CIRC,SE_ACUT,SE_DIAE,   xxxxxx, SE_4, SE_5, SE_6, xxxxxx,
 
-    _______, SE_0,    _______,
-    _______, _______, _______
+    KC_LGUI, KC_LSFT,    ______,
+    ______,  LSFT(SE_0), ______
     ),
 /* Keymap 2: Function layer
  */
 [FUN] = LAYOUT_gergoplex(
-    _______,_______,_______,_______,_______,    KC_F12, KC_F7, KC_F8, KC_F9, xxxxx,
-    _______,_______,_______,_______,_______,    KC_F11, KC_F1, KC_F2, KC_F3, xxxxx,
-    _______,_______,_______,_______,_______,    xxxxx,  KC_F4, KC_F5, KC_F6, xxxxx,
+    ______,______,______,______,______,    KC_F12, KC_F7, KC_F8, KC_F9, TO_BASE,
+    ______,______,______,______,______,    KC_F11, KC_F1, KC_F2, KC_F3, xxxxxx,
+    ______,______,______,______,______,    KC_F10, KC_F4, KC_F5, KC_F6, xxxxxx,
 
-    _______, _______, _______, // Left
-    _______, KC_F10,  _______  // Right
+    ______, ______, ______, // Left
+    ______, ______, ______  // Right
     ),
 /* Keymap 3: Movement/mouse layer
  */
 [MOVE] = LAYOUT_gergoplex(
-    KC_END, KC_PGDN,KC_UP,  KC_PGUP, KC_HOME,    _______,_______,_______,_______,_______,
-    KC_BTN4,KC_LEFT,KC_DOWN,KC_RIGHT,KC_BTN5,    _______,_______,_______,_______,_______,
-    xxxxx,  KC_BTN1,KC_BTN3,KC_BTN2, xxxxx,      _______,_______,_______,_______,_______,
+    KC_LEAD,KC_PGDN,KC_UP,  KC_PGUP, KC_HOME,   ______,______,______,______,TO_BASE,
+    KC_ESC, KC_LEFT,KC_DOWN,KC_RIGHT,KC_END,    ______,______,______,______,______,
+    KC_BTN4,KC_BTN1,xxxxxx, KC_BTN5, xxxxxx,    ______,______,______,______,______,
 
-    _______, _______, _______, // Left
-    _______,   _______,  _______   // Right
+    ______, ______, OSL(SHRT), // Left
+    ______, ______, ______     // Right
     ),
 /* Keymap 4: Shortcut layer
  */
 [SHRT] = LAYOUT_gergoplex(
-    SE_Q,SE_W,SE_E,SE_R,SE_T,    _______,_______,_______,_______,_______,
-    SE_A,SE_S,SE_D,SE_F,SE_G,    _______,_______,_______,_______,_______,
-    SE_Z,SE_X,SE_C,SE_V,SE_B,    _______,_______,_______,_______,_______,
+    KC_LEAD,SE_Q,SE_W,SE_E,SE_R,    ______,______,______,______,TO_BASE,
+    xxxxxx ,SE_A,SE_S,SE_D,SE_F,    ______,______,______,______,______,
+    xxxxxx ,SE_Z,SE_X,SE_C,SE_V,    ______,______,______,______,______,
 
-    _______, _______, _______,   // Left
-    _______, _______, _______    // Right
+    ______, ______, ______,   // Left
+    ______, ______, ______    // Right
     )
 };
 
@@ -170,11 +174,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
       return true;
-    case MOVE_ON:
-      layer_on(MOVE);
-      return false;
-    case MOVE_OFF:
-      layer_off(MOVE);
+    case TO_BASE:
+      layer_clear();
+      clear_oneshot_mods();
       return false;
     case GRV:
       SEND_STRING("`");
@@ -214,13 +216,6 @@ void matrix_scan_user(void) {
   LEADER_DICTIONARY() {
     leading = false;
     leader_end();
-
-    SEQ_ONE_KEY(SE_E) {
-      SEND_STRING("€");
-    }
-    SEQ_ONE_KEY(SE_C) {
-      SEND_STRING("©");
-    }
 
     SEQ_TWO_KEYS(SE_C, SE_C) {
       if (swap_caps_escape) {
