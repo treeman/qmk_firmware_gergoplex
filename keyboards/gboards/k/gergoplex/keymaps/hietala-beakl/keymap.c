@@ -26,20 +26,20 @@
 #define ______ KC_TRNS
 #define xxxxxx KC_NO
 
-#define TH_GUI KC_SPACE
-#define TH_SPACE KC_SPACE
-#define TH_UP OSL(UP)
+#define MY_GUI KC_SPACE
+#define MY_SPACE KC_SPACE
+#define MY_UP OSL(UP)
 
-#define TH_CTRL OSM(MOD_LCTL)
-#define TH_SHIFT OSM(MOD_LSFT)
-#define TH_ALT OSM(MOD_LALT)
+#define MY_CTRL OSM(MOD_LCTL)
+#define MY_SHIFT OSM(MOD_LSFT)
+#define MY_ALT OSM(MOD_LALT)
 
 enum my_keycodes {
   TO_BASE,
   // Avoid dead keys
-  GRV,
-  CIRC,
-  TILD,
+  MY_GRV,
+  MY_CIRC,
+  MY_TILD,
 };
 
 #include "g/keymap_combo.h"
@@ -59,12 +59,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  '-------------------------'           '-----------------'
  */
 [BASE] = LAYOUT_gergoplex(
-    KC_LEAD, SE_H,   SE_O,    SE_U, SE_Q,     SE_W, SE_C, SE_R, SE_F, SE_Z,
+    KC_LEAD, SE_H,   SE_O,    SE_U, SE_X,     SE_Q, SE_C, SE_R, SE_F, SE_Z,
     SE_Y,    SE_I,   SE_E,    SE_A, SE_COLN,  SE_D, SE_S, SE_T, SE_N, SE_B,
-    KC_J,    SE_DOT, SE_COMM, SE_K, SE_X,     SE_G, SE_M, SE_L, SE_P, SE_V,
+    KC_J,    SE_DOT, SE_COMM, SE_K, SE_W,     SE_G, SE_M, SE_L, SE_P, SE_V,
 
-    TH_GUI,  TH_SPACE, TH_UP,
-    TH_CTRL, TH_SHIFT, TH_ALT
+    MY_GUI,  MY_SPACE, MY_UP,
+    MY_CTRL, MY_SHIFT, MY_ALT
     ),
 /* Keymap 1: Up layer
  */
@@ -109,48 +109,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool swap_caps_escape = false;
-bool remapping_shift = false;
+bool remapping_shift[4];
 
 bool mod_down(uint16_t mod) {
     return keyboard_report->mods & MOD_BIT(mod);
 }
 
-bool remap_shift(keyrecord_t *record, uint16_t keycode) {
+bool mod_one_shot(uint16_t mod) {
+    return (get_oneshot_mods() & MOD_BIT(mod)) && !has_oneshot_mods_timed_out();
+}
+
+bool remap_shift(keyrecord_t *record, uint16_t keycode, uint16_t i) {
     if (record->event.pressed) {
-        bool shift = keyboard_report->mods & MOD_BIT(KC_LSFT);
-        bool one_shot_shift = (get_oneshot_mods() & MOD_BIT(KC_LSFT)) &&
-            !has_oneshot_mods_timed_out() && false;
+        bool shift = mod_down(KC_LSFT);
+        bool one_shot_shift = mod_one_shot(KC_LSFT);
 
         if (!shift && !one_shot_shift) return false;
 
-        if (shift) {
-            unregister_mods(MOD_BIT(KC_LSFT));
-            tap_code16(keycode);
-            register_mods(MOD_BIT(KC_LSFT));
-        } else {
-            clear_oneshot_mods();
-            tap_code16(keycode);
-        }
-        remapping_shift = true;
+        register_code(keycode);
+
+        remapping_shift[i] = true;
     } else {
-        if (!remapping_shift) return false;
-        // If we move unregister_code and register shift here,
-        // and if we do
-        //
-        //  shift down
-        //  keycode down
-        //  shift up
-        //  keycode up
-        //
-        // we'll get stuck with shift.
-        //
-        // If we instead tap on pressed auto repeat breaks, but
-        // we'll never find ourselves in a bad position.
-        remapping_shift = false;
+        if (!remapping_shift[i]) return false;
+
+        unregister_code(keycode);
+
+        remapping_shift[i] = false;
     }
     return true;
 }
-
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -178,30 +165,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       layer_clear();
       clear_oneshot_mods();
       return false;
-    case GRV:
+    case MY_GRV:
       SEND_STRING("`");
       return false;
-    case CIRC:
+    case MY_CIRC:
       SEND_STRING("^");
       return false;
-    case TILD:
+    case MY_TILD:
       SEND_STRING("~");
       return false;
     case SE_DOT:
       // . -> !
-      if (remap_shift(record, SE_EXLM)) return false;
+      if (remap_shift(record, SE_1, 0)) return false;
       return true;
     case SE_COMM:
       // , -> ?
-      if (remap_shift(record, SE_QUES)) return false;
+      if (remap_shift(record, SE_PLUS, 1)) return false;
       return true;
-    case SE_SLSH:
-      // / -> \ (unshift + altgr)
-      if (remap_shift(record, SE_BSLS)) return false;
+    case MY_SPACE:
+      // space -> /
+      if (remap_shift(record, SE_7, 2)) return false;
       return true;
     case SE_COLN:
-      // : -> @ (unshift + altgr)
-      if (remap_shift(record, SE_AT)) return false;
+      // : -> %
+      if (remap_shift(record, SE_5, 3)) return false;
       return true;
     default:
       return true;

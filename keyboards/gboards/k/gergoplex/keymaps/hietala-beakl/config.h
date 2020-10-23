@@ -10,7 +10,7 @@
 
 #define COMBO_PERMISSIVE_HOLD
 #undef COMBO_TERM
-#define COMBO_TERM 25
+#define COMBO_TERM 30
 //#define COMBO_TERM_PER_COMBO
 
 #define LEADER_TIMEOUT 250

@@ -3,29 +3,29 @@ COMB(lt,            SE_LABK,        SE_H, SE_I)
 COMB(lbrc,          SE_LBRC,        SE_O, SE_E)
 COMB(lcbr,          SE_LCBR,        SE_U, SE_A)
 // Lower left vertical symbols
-COMB(plus,          SE_PLUS,        SE_Y, SE_J)
 COMB(min,           SE_MINS,        SE_I, SE_DOT)
 COMB(hash,          SE_HASH,        SE_E, SE_COMM)
 COMB(scln,          SE_SCLN,        SE_A, SE_K)
+COMB(plus,          SE_PLUS,        SE_COLN, SE_W)
 // Upper right vertical symbols
 COMB(rcbr,          SE_RCBR,        SE_C, SE_S)
 COMB(rbrc,          SE_RBRC,        SE_R, SE_T)
 COMB(gt,            SE_RABK,        SE_F, SE_N)
 // Lower right vertical symbols
+COMB(bsls,          SE_BSLS,        SE_D, SE_G)
 COMB(eq,            SE_EQL,         SE_S, SE_M)
 COMB(astr,          SE_ASTR,        SE_T, SE_L)
 COMB(unds,          SE_UNDS,        SE_N, SE_P)
-COMB(bsls,          SE_BSLS,        SE_B, SE_V)
 
 // Upper left horizontal
 COMB(pipe,          SE_PIPE,        SE_O, SE_U)
 COMB(dlr,           SE_DLR,         SE_H, SE_U)
-COMB(grv,           GRV,            SE_H, SE_O, SE_U)
+COMB(grv,           MY_GRV,         SE_H, SE_O, SE_U)
 // Upper right horizontal
-COMB(tild,          TILD,           SE_C, SE_R)
+COMB(tild,          MY_TILD,        SE_C, SE_R)
 COMB(ampr,          SE_AMPR,        SE_R, SE_F)
 COMB(perc,          SE_PERC,        SE_C, SE_F)
-COMB(circ,          CIRC,           SE_C, SE_R, SE_F)
+COMB(circ,          MY_CIRC,        SE_C, SE_R, SE_F)
 COMB(delete,        KC_DEL,         SE_F, SE_Z)
 
 // Home left horizontal
