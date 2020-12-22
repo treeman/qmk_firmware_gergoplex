@@ -2,6 +2,7 @@ MOUSEKEY_ENABLE = yes
 LEADER_ENABLE = yes
 UNICODE_ENABLE = yes
 WPM_ENABLE = yes
+TAP_DANCE_ENABLE = yes
 
 # Combos!
 VPATH +=  keyboards/gboards/
