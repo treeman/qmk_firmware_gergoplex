@@ -36,19 +36,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, MY_ESC, SE_COLN, SE_H,    SE_U,    SE_DQUO,                                     SE_X, SE_C,   SE_R,    SE_F, MY_ENT, _______,
       _______, MY_Y,   MY_I,    MY_O,    MY_A,    SE_W,                                        SE_D, MY_S,   MY_T,    MY_N, MY_B,   _______,
       _______, SE_J,   SE_DOT,  SE_COMM, SE_K,    SE_SLSH, MY_USFT, MY_RALT, MY_FUN,  KC_LGUI, SE_G, SE_M,   SE_L,    SE_P, SE_V,   _______,
-                                _______, SE_PERC, MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_NUM,  MY_E, SE_EQL, _______
+                                L_ENCM,  SE_PERC, MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_NUM,  MY_E, SE_EQL, R_ENCM
+    ),
+    [_NUM] = LAYOUT(
+      _______, _______, SE_6,    SE_5,    SE_4,    _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, SE_3,    SE_2,    SE_1,    SE_0,    _______,                                     _______, _______, _______, _______, _______, _______,
+      _______, _______, SE_9,    SE_8,    SE_7   , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
 #ifdef ENCODER_ENABLE
-        case ENC_MODE_L:
+        case L_ENCM:
             if (record->event.pressed) {
                 cycle_left_encoder_mode(false);
             }
             break;
-        case ENC_MODE_R:
+        case R_ENCM:
             if (record->event.pressed) {
                 cycle_right_encoder_mode(false);
             }
@@ -58,24 +64,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-/*
-// FIXME this should be defined here?
 #ifdef OLED_DRIVER_ENABLE
-oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_180;
+}
 
-void oled_task_user(void) { render_status(); }
+void oled_task_user(void) {
+    if (is_keyboard_master()) {
+        render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+    } else {
+        render_kyria_logo();
+    }
+}
 #endif
-*/
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        update_left_encoder(clockwise);
+        action_left_encoder(clockwise);
 #    ifdef OLED_DRIVER_ENABLE
         oled_on();
 #    endif
     } else if (index == 1) {
-        update_right_encoder(clockwise);
+        action_right_encoder(clockwise);
 #    ifdef OLED_DRIVER_ENABLE
         oled_on();
 #    endif

@@ -22,6 +22,6 @@ right_encoder_mode_t encoder_right_mode;
 void cycle_left_encoder_mode(bool reverse);
 void cycle_right_encoder_mode(bool reverse);
 
-void update_left_encoder(bool clockwise);
-void update_right_encoder(bool clockwise);
+void action_left_encoder(bool clockwise);
+void action_right_encoder(bool clockwise);
 

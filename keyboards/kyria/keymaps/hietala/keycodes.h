@@ -12,8 +12,8 @@ enum layers {
 };
 
 enum custom_keycodes {
-    ENC_MODE_L = SAFE_RANGE,
-    ENC_MODE_R
+    L_ENCM = SAFE_RANGE,
+    R_ENCM
 };
 
 #define MY_Y LGUI_T(SE_Y)
