@@ -16,6 +16,8 @@ enum custom_keycodes {
     R_ENCM
 };
 
+#define xxxxxxx KC_NO
+
 #define MY_Y LGUI_T(SE_Y)
 #define MY_I LALT_T(SE_I)
 #define MY_O LSFT_T(SE_O)

@@ -33,15 +33,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: Modified Beakl-15
  */
     [_BASE] = LAYOUT(
-      _______, MY_ESC, SE_COLN, SE_H,    SE_U,    SE_DQUO,                                     SE_X, SE_C,   SE_R,    SE_F, MY_ENT, _______,
-      _______, MY_Y,   MY_I,    MY_O,    MY_A,    SE_W,                                        SE_D, MY_S,   MY_T,    MY_N, MY_B,   _______,
-      _______, SE_J,   SE_DOT,  SE_COMM, SE_K,    SE_SLSH, MY_USFT, MY_RALT, MY_FUN,  KC_LGUI, SE_G, SE_M,   SE_L,    SE_P, SE_V,   _______,
-                                L_ENCM,  SE_PERC, MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_NUM,  MY_E, SE_EQL, R_ENCM
+      xxxxxxx, MY_ESC,  SE_COLN, SE_H,    SE_U,    SE_DQUO,                                     SE_X,    SE_C,    SE_R,    SE_F,    MY_ENT,  xxxxxxx,
+      xxxxxxx, MY_Y,    MY_I,    MY_O,    MY_A,    SE_W,                                        SE_D,    MY_S,    MY_T,    MY_N,    MY_B,    xxxxxxx,
+      xxxxxxx, SE_J,    SE_DOT,  SE_COMM, SE_K,    SE_SLSH, MY_USFT, MY_RALT, MY_FUN,  KC_LGUI, SE_G,    SE_M,    SE_L,    SE_P,    SE_V,    xxxxxxx,
+                                 L_ENCM,  SE_PERC, MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_NUM,  MY_E,    SE_EQL,  R_ENCM
     ),
     [_NUM] = LAYOUT(
-      _______, _______, SE_6,    SE_5,    SE_4,    _______,                                     _______, _______, _______, _______, _______, _______,
-      _______, SE_3,    SE_2,    SE_1,    SE_0,    _______,                                     _______, _______, _______, _______, _______, _______,
-      _______, _______, SE_9,    SE_8,    SE_7   , _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+      xxxxxxx, _______, SE_6,    SE_5,    SE_4,    xxxxxxx,                                     _______, _______, _______, _______, KC_PENT, xxxxxxx,
+      xxxxxxx, SE_3,    SE_2,    SE_1,    SE_0,    xxxxxxx,                                     _______, _______, _______, _______, _______, xxxxxxx,
+      xxxxxxx, xxxxxxx, SE_9,    SE_8,    SE_7,    xxxxxxx, _______, _______, _______, _______, _______, _______, _______, _______, _______, xxxxxxx,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    ),
+    [_FUN] = LAYOUT(
+      xxxxxxx, _______, KC_F6,   KC_F5,   KC_F4,   KC_F12,                                      _______, _______, _______, _______, _______, xxxxxxx,
+      xxxxxxx, KC_F3,   KC_F2,   KC_F1,   xxxxxxx, KC_F11,                                      _______, _______, _______, _______, _______, xxxxxxx,
+      xxxxxxx, xxxxxxx, KC_F9,   KC_F8,   KC_F7,   KC_F10,  _______, _______, _______, _______, _______, _______, _______, _______, _______, xxxxxxx,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     )
 };
