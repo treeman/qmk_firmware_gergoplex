@@ -2,6 +2,6 @@
 
 #include "keycodes.h"
 
-void render_kyria_logo(void);
+void render_master_status(void);
+void render_slave_status(void);
 
-void render_status(void);

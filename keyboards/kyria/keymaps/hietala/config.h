@@ -16,6 +16,8 @@
 
 #pragma once
 
+#define KEYMAP_VERSION "Beakl JH 0.1"
+
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
 #endif

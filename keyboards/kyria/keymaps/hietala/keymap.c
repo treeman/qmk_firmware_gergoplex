@@ -34,8 +34,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_BASE] = LAYOUT(
       xxxxxxx, MY_ESC,  SE_COLN, SE_O,    SE_U,    SE_DQUO,                                     SE_X,    SE_C,    SE_R,    SE_F,    MY_ENT,  xxxxxxx,
-      xxxxxxx, SE_Y,    MY_H,    MY_E,    MY_A,    SE_W,                                        SE_D,    MY_S,    MY_T,    MY_N,    SE_B,    xxxxxxx,
-      xxxxxxx, SE_J,    MY_DOT,  SE_COMM, MY_K,    SE_SLSH, MY_LCTL, xxxxxxx, MY_FUN,  MY_RCTL, SE_G,    MY_M,    SE_L,    MY_P,    SE_V,    xxxxxxx,
+      xxxxxxx, SE_Y,    MY_H,    MY_E,    MY_A,    SE_W,                                        SE_D,    MY_S,    MY_T,    MY_N,    SE_V,    xxxxxxx,
+      xxxxxxx, SE_J,    MY_DOT,  SE_COMM, MY_K,    SE_SLSH, MY_LCTL, xxxxxxx, MY_FUN,  MY_RCTL, SE_G,    MY_M,    SE_L,    MY_P,    SE_B,    xxxxxxx,
                                  L_ENCM,  SE_PERC, MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_RSFT, MY_I,    MY_NUM,  R_ENCM
     ),
     [_NUM] = LAYOUT(
@@ -77,9 +77,9 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+        render_master_status();
     } else {
-        render_kyria_logo();
+        render_slave_status();
     }
 }
 #endif
