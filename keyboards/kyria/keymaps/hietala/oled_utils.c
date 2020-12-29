@@ -1,5 +1,6 @@
 #include "oled_utils.h"
 #include "encoder_utils.h"
+#include "status.h"
 #include <stdio.h>
 
 void render_keymap_version(void) {
@@ -77,7 +78,9 @@ void render_caps(void) {
     if (IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK)) {
         oled_write_P(PSTR("CAPS "), false);
     }
-    oled_write_P(PSTR("(Swapped ESC)"), false);
+    if (swap_caps_escape) {
+        oled_write_P(PSTR("(Swapped ESC)"), false);
+    }
     // TODO Render swapped ESC/CAPS status
     oled_write_ln("", false);
 

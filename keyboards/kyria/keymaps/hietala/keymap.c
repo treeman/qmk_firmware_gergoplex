@@ -16,6 +16,7 @@
 #include QMK_KEYBOARD_H
 
 #include "keycodes.h"
+#include "status.h"
 
 #include "sendstring_swedish.h"
 
@@ -27,6 +28,7 @@
 #    include "oled_utils.h"
 #endif
 
+bool inside_leader;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -66,6 +68,55 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 #endif
+    case KC_ESC:
+      if (swap_caps_escape && !inside_leader) {
+        if (record->event.pressed) {
+            register_code(KC_CAPS);
+        } else {
+            unregister_code(KC_CAPS);
+        }
+        return false;
+      }
+      return true;
+    case KC_CAPS:
+      if (swap_caps_escape && !inside_leader) {
+        if (record->event.pressed) {
+            register_code(KC_ESC);
+        } else {
+            unregister_code(KC_ESC);
+        }
+        return false;
+      }
+      return true;
+    /* case TO_BASE: */
+    /*   layer_clear(); */
+    /*   clear_oneshot_mods(); */
+    /*   return false; */
+    /* case MY_GRV: */
+    /*   SEND_STRING("`"); */
+    /*   return false; */
+    /* case MY_CIRC: */
+    /*   SEND_STRING("^"); */
+    /*   return false; */
+    /* case MY_TILD: */
+    /*   SEND_STRING("~"); */
+    /*   return false; */
+    /* case SE_DOT: */
+    /*   // . -> ! */
+    /*   if (remap_shift(record, SE_1, 0)) return false; */
+    /*   return true; */
+    /* case SE_COMM: */
+    /*   // , -> ? */
+    /*   if (remap_shift(record, SE_PLUS, 1)) return false; */
+    /*   return true; */
+    /* case MY_SPACE: */
+    /*   // space -> / */
+    /*   if (remap_shift(record, SE_7, 2)) return false; */
+    /*   return true; */
+    /* case SE_COLN: */
+    /*   // : -> % */
+    /*   if (remap_shift(record, SE_5, 3)) return false; */
+    /*   return true; */
     }
     return true;
 }
@@ -95,3 +146,43 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
 }
 #endif
+
+void swap_caps_esc(void) {
+    swap_caps_escape = !swap_caps_escape;
+#   ifdef OLED_DRIVER_ENABLE
+        oled_on();
+#   endif
+}
+
+LEADER_EXTERNS();
+
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_TWO_KEYS(SE_C, SE_C) {
+      if (swap_caps_escape) {
+        tap_code(KC_ESC);
+      } else {
+        tap_code(KC_CAPS);
+      }
+    }
+
+    SEQ_ONE_KEY(KC_ESC) {
+        swap_caps_esc();
+    }
+    SEQ_ONE_KEY(KC_CAPS) {
+        swap_caps_esc();
+    }
+  }
+}
+
+void leader_start(void) {
+    inside_leader = true;
+}
+
+void leader_end(void) {
+    inside_leader = false;
+}
+
