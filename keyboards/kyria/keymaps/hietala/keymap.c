@@ -35,10 +35,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: Modified Beakl-15
  */
     [_BASE] = LAYOUT(
-      xxxxxxx, MY_ESC,  SE_COLN, SE_O,    SE_U,    SE_DQUO,                                     SE_X,    SE_C,    SE_R,    SE_F,    MY_ENT,  xxxxxxx,
+      xxxxxxx, SE_DQUO, SE_COLN, SE_O,    SE_U,    SE_SLSH,                                     SE_J,    SE_C,    SE_R,    SE_F,    SE_G,    xxxxxxx,
       xxxxxxx, SE_Y,    MY_H,    MY_E,    MY_A,    SE_W,                                        SE_D,    MY_S,    MY_T,    MY_N,    SE_V,    xxxxxxx,
-      xxxxxxx, SE_J,    MY_DOT,  SE_COMM, MY_K,    SE_SLSH, MY_LCTL, xxxxxxx, MY_FUN,  MY_RCTL, SE_G,    MY_M,    SE_L,    MY_P,    SE_B,    xxxxxxx,
-                                 L_ENCM,  SE_PERC, MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_RSFT, MY_I,    MY_NUM,  R_ENCM
+      xxxxxxx, SE_X,    MY_DOT,  SE_COMM, MY_K,    SE_UNDS, MY_LCTL, xxxxxxx, MY_FUN,  MY_RCTL, SE_MINS, MY_M,    SE_L,    MY_P,    SE_B,    xxxxxxx,
+                                 L_ENCM,  SE_EQL,  MY_SPC,  MY_LSFT, KC_LEAD, KC_LEAD, MY_RSFT, MY_I,    MY_NUM,  R_ENCM
     ),
     [_NUM] = LAYOUT(
       xxxxxxx, _______, SE_6,    SE_5,    SE_4,    xxxxxxx,                                     _______, _______, _______, _______, KC_PENT, xxxxxxx,
