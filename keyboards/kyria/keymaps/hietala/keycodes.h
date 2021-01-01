@@ -19,6 +19,8 @@ enum custom_keycodes {
 #define xxxxxxx KC_NO
 
 
+/*
+ * Reinsert these when we've learned the layout better
 #define MY_R LGUI_T(SE_R)
 #define MY_S LALT_T(SE_S)
 #define MY_T LCTL_T(SE_T)
@@ -28,7 +30,17 @@ enum custom_keycodes {
 #define MY_A RCTL_T(SE_A)
 #define MY_I LALT_T(SE_I)
 #define MY_O RGUI_T(SE_O)
+*/
 
+#define MY_R SE_R
+#define MY_S SE_S
+#define MY_T SE_T
+#define MY_H SE_H
+
+#define MY_N SE_N
+#define MY_A SE_A
+#define MY_I SE_I
+#define MY_O SE_O
 
 #define MY_SPC KC_SPACE
 #define MY_E SE_E
