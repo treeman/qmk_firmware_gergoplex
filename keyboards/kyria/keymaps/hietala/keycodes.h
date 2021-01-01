@@ -19,23 +19,19 @@ enum custom_keycodes {
 #define xxxxxxx KC_NO
 
 
-#define MY_H LALT_T(SE_H)
-#define MY_E LCTL_T(SE_E)
-#define MY_A LSFT_T(SE_A)
+#define MY_R LGUI_T(SE_R)
+#define MY_S LALT_T(SE_S)
+#define MY_T LCTL_T(SE_T)
+#define MY_H LSFT_T(SE_H)
 
-#define MY_S RSFT_T(SE_S)
-#define MY_T RCTL_T(SE_T)
-#define MY_N LALT_T(SE_N)
-
-#define MY_DOT RALT_T(SE_DOT)
-#define MY_K LGUI_T(SE_K)
-
-#define MY_M RGUI_T(SE_M)
-#define MY_P RALT_T(SE_P)
+#define MY_N RSFT_T(SE_N)
+#define MY_A RCTL_T(SE_A)
+#define MY_I LALT_T(SE_I)
+#define MY_O RGUI_T(SE_O)
 
 
 #define MY_SPC KC_SPACE
-#define MY_I SE_I
+#define MY_E SE_E
 
 
 #define MY_ESC KC_ESC
